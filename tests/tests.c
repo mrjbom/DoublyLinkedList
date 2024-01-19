@@ -1,5 +1,5 @@
 #include "tests.h"
-#include "dllist.h"
+#include "../dllist/dllist.h"
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>

@@ -145,13 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dllist.c" />
+    <ClCompile Include="dllist\dllist.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="tests.c" />
+    <ClCompile Include="tests\tests.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dllist.h" />
-    <ClInclude Include="tests.h" />
+    <ClInclude Include="dllist\dllist.h" />
+    <ClInclude Include="tests\tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,24 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\dllist">
+      <UniqueIdentifier>{e81269b1-01fb-4b76-bc65-776ada175c49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dllist">
+      <UniqueIdentifier>{7b383c9c-82bf-4db1-9b38-ee81ea31565e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tests">
+      <UniqueIdentifier>{1822f04a-bd4e-47d6-9a32-83ac623694dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test">
+      <UniqueIdentifier>{7bbe9c9b-8c8b-4dc5-ac04-fdf51452c674}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dllist.c">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="dllist\dllist.c">
+      <Filter>Source Files\dllist</Filter>
     </ClCompile>
-    <ClCompile Include="tests.c">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="tests\tests.c">
+      <Filter>Source Files\test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dllist.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="dllist\dllist.h">
+      <Filter>Header Files\dllist</Filter>
     </ClInclude>
-    <ClInclude Include="tests.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="tests\tests.h">
+      <Filter>Header Files\tests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
