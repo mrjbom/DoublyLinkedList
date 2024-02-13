@@ -8,7 +8,6 @@
 typedef struct {
     void* next;
     void* prev;
-    void* data;
 } dll_node_t;
 
 typedef struct {
