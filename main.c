@@ -35,13 +35,13 @@ int main(void)
     data_array_ptr[1].some_data = 2;
 
     dll_insert_node_to_tail(&list, (dll_node_t*)&data_array_ptr[0]); // Or &data_array_ptr[0].dll_node
-    dll_insert_node_to_tail(&list, (dll_node_t*)&data_array_ptr[0]); // Or &data_array_ptr[1].dll_node
+    dll_insert_node_to_tail(&list, (dll_node_t*)&data_array_ptr[1]); // Or &data_array_ptr[1].dll_node
 
     // Get first and second node data
     data_t* first_node_data = (data_t*)list.head; // Or (data_t*)dll_get_nth_node(&list, 0);
     data_t* second_node_data = (data_t*)list.tail; // Or (data_t*)dll_get_nth_node(&list, 1);
-    printf("First node data %u\n", first_node_data->some_data);
-    printf("First node data %u\n", second_node_data->some_data);
+    printf("First node data %d\n", first_node_data->some_data);
+    printf("Second node data %d\n", second_node_data->some_data);
 
     free(data_array_ptr);
     return 0;
