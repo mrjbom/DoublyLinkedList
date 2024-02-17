@@ -47,4 +47,10 @@ extern void dll_insert_node_before_node(doubly_linked_list_t* list, dll_node_t* 
  */
 extern void dll_remove_node(doubly_linked_list_t* list, dll_node_t* node);
 
+/*
+ * Get node by index
+ * Returns NULL if the node failed to be get
+ */
+extern dll_node_t* dll_get_nth_node(doubly_linked_list_t* list, size_t index);
+
 #endif

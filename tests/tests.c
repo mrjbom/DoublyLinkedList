@@ -386,3 +386,82 @@ void test_remove_node()
 
     free(nodes);
 }
+
+void test_get_nth_node()
+{
+    // TEST 1: Get node from empty list
+    // TEST 2: Get node from list with 1 node
+    // TEST 3: Get nodes from list with 2 nodes (insert node before)
+    // TEST 4: Get nodes from list with 3 nodes (insert node before last)
+    // TEST 5: Get nodes from list with 2 nodes (remove middle node)
+
+    // TEST 1:
+    // Prepare
+    doubly_linked_list_t list;
+    memset(&list, 0, sizeof(doubly_linked_list_t));
+    
+    // Use and check
+    // empty
+    dll_node_t* received_node = dll_get_nth_node(&list, 0);
+    assert(received_node == NULL);
+    received_node = dll_get_nth_node(&list, 1);
+    assert(received_node == NULL);
+    received_node = dll_get_nth_node(&list, 2);
+    assert(received_node == NULL);
+
+    // TEST 2:
+    // Prepare
+    dll_node_t* nodes = malloc(sizeof(dll_node_t) * 3);
+    assert(nodes != NULL);
+    dll_insert_node_to_tail(&list, &nodes[0]);
+
+    // Use and check
+    // nodes[0]
+    received_node = dll_get_nth_node(&list, 0);
+    assert(received_node == &nodes[0]);
+    received_node = dll_get_nth_node(&list, 1);
+    assert(received_node == NULL);
+
+    // TEST 3:
+    // Prepare
+    dll_insert_node_before_node(&list, &nodes[0], &nodes[1]);
+
+    // Use and check
+    // nodes[1]<->nodes[0]
+    received_node = dll_get_nth_node(&list, 0);
+    assert(received_node == &nodes[1]);
+    received_node = dll_get_nth_node(&list, 1);
+    assert(received_node == &nodes[0]);
+    received_node = dll_get_nth_node(&list, 2);
+    assert(received_node == NULL);
+
+    // TEST 4:
+    // Prepare
+    dll_insert_node_before_node(&list, &nodes[1], &nodes[2]);
+
+    // Use and check
+    // nodes[2]<->nodes[1]<->nodes[0]
+    received_node = dll_get_nth_node(&list, 0);
+    assert(received_node == &nodes[2]);
+    received_node = dll_get_nth_node(&list, 1);
+    assert(received_node == &nodes[1]);
+    received_node = dll_get_nth_node(&list, 2);
+    assert(received_node == &nodes[0]);
+    received_node = dll_get_nth_node(&list, 3);
+    assert(received_node == NULL);
+
+    // TEST 5:
+    // Prepare
+    dll_remove_node(&list, &nodes[1]);
+
+    // Use and check
+    // nodes[2]<->nodes[0]
+    received_node = dll_get_nth_node(&list, 0);
+    assert(received_node == &nodes[2]);
+    received_node = dll_get_nth_node(&list, 1);
+    assert(received_node == &nodes[0]);
+    received_node = dll_get_nth_node(&list, 2);
+    assert(received_node == NULL);
+
+    free(nodes);
+}
