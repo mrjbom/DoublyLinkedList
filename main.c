@@ -23,6 +23,8 @@ int main(void)
     test_remove_node();
     printf("test_get_nth_node\n");
     test_get_nth_node();
+    printf("test_random\n");
+    test_random();
 
     // Example
     doubly_linked_list_t list;

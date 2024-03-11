@@ -13,4 +13,6 @@ extern void test_remove_node();
 
 extern void test_get_nth_node();
 
+extern void test_random();
+
 #endif

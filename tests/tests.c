@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <time.h>
+#include <stdio.h>
 
 void test_insert_node_to_tail()
 {
@@ -464,4 +466,134 @@ void test_get_nth_node()
     assert(received_node == NULL);
 
     free(nodes);
+}
+
+// TEST RANDOM STAFF
+void do_action(doubly_linked_list_t* list);
+void add_block(doubly_linked_list_t* list);
+void remove_block(doubly_linked_list_t* list);
+void insert_after_or_before_blocks(doubly_linked_list_t* list);
+
+uint8_t max_blocks_number = 32;
+
+void test_random()
+{
+    srand((unsigned int)time(0));
+    for (uint32_t j = 0; j < 128; ++j) {
+        doubly_linked_list_t list;
+        memset(&list, 0, sizeof(list));
+
+        for (uint32_t i = 0; i < 512; ++i) {
+            //printf("Number of blocks: %u\n", list.count);
+            do_action(&list);
+        }
+        for (size_t i = 0; i < list.count; ++i) {
+            size_t random_index = rand() % list.count;
+            dll_node_t* node = dll_get_nth_node(&list, random_index);
+            dll_remove_node(&list, node);
+            free(node);
+        }
+    }
+}
+
+void do_action(doubly_linked_list_t* list)
+{
+    if (list->count == 0) {
+        add_block(list);
+        return;
+    }
+
+    // We can add or insert new blocks?
+    if (list->count < max_blocks_number) {
+        // We can
+        // Add or Insert
+        // 0 - add
+        // 1 - insert
+        // 2-3 - remove
+        uint8_t a_or_i_or_r = rand() % 4;
+        if (a_or_i_or_r == 0) {
+            add_block(list);
+            return;
+        }
+        if (a_or_i_or_r == 1) {
+            insert_after_or_before_blocks(list);
+            return;
+        }
+        if (a_or_i_or_r > 1) {
+            remove_block(list);
+        }
+    }
+    else {
+        // We can't
+        // Remove blocks
+        remove_block(list);
+        return;
+    }
+}
+
+void add_block(doubly_linked_list_t* list)
+{
+    //printf("ADD\n");
+    if (list->count == 0) {
+        dll_node_t* node = malloc(sizeof(dll_node_t));
+        assert(node);
+        dll_insert_node_to_tail(list, node);
+        return;
+    }
+    uint8_t block_add_max = 3;
+    // [1; block_add_max]
+    uint8_t block_add_number = 1 + (rand() % block_add_max);
+    for (uint8_t i = 0; i < block_add_number; ++i) {
+        dll_node_t* node = malloc(sizeof(dll_node_t));
+        assert(node);
+        // 0 - to tail
+        // 1 - to head
+        uint8_t t_or_h = rand() % 2;
+        if (t_or_h == 0) {
+            dll_insert_node_to_tail(list, node);
+        }
+        else {
+            dll_insert_node_to_head(list, node);
+        }
+    }
+}
+
+void remove_block(doubly_linked_list_t* list)
+{
+    if (list->count == 0) {
+        return;
+    }
+    //printf("REMOVE\n");
+
+    uint8_t block_free_max = 2;
+    if (block_free_max > list->count) {
+        block_free_max = (uint8_t)list->count;
+    }
+    // [1; block_free_max]
+    uint8_t block_add_number = 1 + (rand() % block_free_max);
+    for (uint8_t i = 0; i < block_add_number; ++i) {
+        uint32_t index = rand() % list->count;
+        dll_node_t* node = dll_get_nth_node(list, index);
+        assert(node);
+        dll_remove_node(list, node);
+        free(node);
+    }
+}
+
+void insert_after_or_before_blocks(doubly_linked_list_t* list)
+{
+    //printf("INSERT\n");
+    dll_node_t* new_node = malloc(sizeof(dll_node_t));
+    assert(new_node);
+    uint32_t in_list_index = rand() % list->count;
+    dll_node_t* in_list_node = dll_get_nth_node(list, in_list_index);
+    // 0 - after
+    // 1 - before
+    uint8_t a_or_b = rand() % 2;
+    if (a_or_b == 0) {
+        dll_insert_node_after_node(list, in_list_node, new_node);
+    }
+    else {
+        dll_insert_node_before_node(list, in_list_node, new_node);
+    }
 }
