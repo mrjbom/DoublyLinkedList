@@ -18,6 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sources\dllist\dllist.c" />
+    <ClCompile Include="sources\main.c" />
+    <ClCompile Include="sources\tests\tests.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sources\dllist\dllist.h" />
+    <ClInclude Include="sources\tests\tests.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -144,15 +153,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="dllist\dllist.c" />
-    <ClCompile Include="main.c" />
-    <ClCompile Include="tests\tests.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="dllist\dllist.h" />
-    <ClInclude Include="tests\tests.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

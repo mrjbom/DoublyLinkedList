@@ -13,36 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\dllist">
+    <Filter Include="Header Files\sources">
+      <UniqueIdentifier>{21c0a035-15ef-4895-9b06-e934fe1ebb92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sources\dllist">
       <UniqueIdentifier>{e81269b1-01fb-4b76-bc65-776ada175c49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\dllist">
-      <UniqueIdentifier>{7b383c9c-82bf-4db1-9b38-ee81ea31565e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\tests">
+    <Filter Include="Header Files\sources\tests">
       <UniqueIdentifier>{1822f04a-bd4e-47d6-9a32-83ac623694dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test">
+    <Filter Include="Source Files\sources">
+      <UniqueIdentifier>{459078a4-a344-4c4f-a7b7-55e8bd16a618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sources\test">
       <UniqueIdentifier>{7bbe9c9b-8c8b-4dc5-ac04-fdf51452c674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sources\dllist">
+      <UniqueIdentifier>{7b383c9c-82bf-4db1-9b38-ee81ea31565e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="sources\main.c">
+      <Filter>Source Files\sources</Filter>
     </ClCompile>
-    <ClCompile Include="dllist\dllist.c">
-      <Filter>Source Files\dllist</Filter>
+    <ClCompile Include="sources\dllist\dllist.c">
+      <Filter>Source Files\sources\dllist</Filter>
     </ClCompile>
-    <ClCompile Include="tests\tests.c">
-      <Filter>Source Files\test</Filter>
+    <ClCompile Include="sources\tests\tests.c">
+      <Filter>Source Files\sources\test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dllist\dllist.h">
-      <Filter>Header Files\dllist</Filter>
+    <ClInclude Include="sources\dllist\dllist.h">
+      <Filter>Header Files\sources\dllist</Filter>
     </ClInclude>
-    <ClInclude Include="tests\tests.h">
-      <Filter>Header Files\tests</Filter>
+    <ClInclude Include="sources\tests\tests.h">
+      <Filter>Header Files\sources\tests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
