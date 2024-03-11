@@ -1,5 +1,5 @@
 #include "tests.h"
-#include "../dllist/dllist.h"
+#include "../sllist/sllist.h"
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -13,14 +13,14 @@ void test_insert_node_to_tail()
 
     // TEST 1
     // Prepare
-    doubly_linked_list_t list;
-    memset(&list, 0, sizeof(doubly_linked_list_t));
-    dll_node_t* node = malloc(sizeof(dll_node_t));
+    singly_linked_list_t list;
+    memset(&list, 0, sizeof(singly_linked_list_t));
+    sll_node_t* node = malloc(sizeof(sll_node_t));
     assert(node != NULL);
-    memset(node, 0, sizeof(dll_node_t));
+    memset(node, 0, sizeof(sll_node_t));
 
     // Use
-    dll_insert_node_to_tail(&list, node);
+    sll_insert_node_to_tail(&list, node);
     
     // Check
     // node
@@ -28,16 +28,15 @@ void test_insert_node_to_tail()
     assert(list.head == node);
     assert(list.tail == node);
     assert(node->next == NULL);
-    assert(node->prev == NULL);
 
     // TEST 2
     // Prepare
-    dll_node_t* node1 = malloc(sizeof(dll_node_t));
+    sll_node_t* node1 = malloc(sizeof(sll_node_t));
     assert(node1 != NULL);
-    memset(node1, 0, sizeof(dll_node_t));
+    memset(node1, 0, sizeof(sll_node_t));
 
     // Use
-    dll_insert_node_to_tail(&list, node1);
+    sll_insert_node_to_tail(&list, node1);
 
     // Check
     // node <-> node1
@@ -45,8 +44,6 @@ void test_insert_node_to_tail()
     assert(list.head == node);
     assert(list.tail == node1);
     assert(node->next == node1);
-    assert(node1->prev == node);
-    assert(node->prev == NULL);
     assert(node1->next == NULL);
 
     free(node);
@@ -60,14 +57,14 @@ void test_insert_node_to_head()
 
     // TEST 1
     // Prepare
-    doubly_linked_list_t list;
-    memset(&list, 0, sizeof(doubly_linked_list_t));
-    dll_node_t* node = malloc(sizeof(dll_node_t));
+    singly_linked_list_t list;
+    memset(&list, 0, sizeof(singly_linked_list_t));
+    sll_node_t* node = malloc(sizeof(sll_node_t));
     assert(node != NULL);
-    memset(node, 0, sizeof(dll_node_t));
+    memset(node, 0, sizeof(sll_node_t));
 
     // Use
-    dll_insert_node_to_head(&list, node);
+    sll_insert_node_to_head(&list, node);
 
     // Check
     // node
@@ -75,16 +72,15 @@ void test_insert_node_to_head()
     assert(list.head == node);
     assert(list.tail == node);
     assert(node->next == NULL);
-    assert(node->prev == NULL);
 
     // TEST 2
     // Prepare
-    dll_node_t* node1 = malloc(sizeof(dll_node_t));
+    sll_node_t* node1 = malloc(sizeof(sll_node_t));
     assert(node1 != NULL);
-    memset(node1, 0, sizeof(dll_node_t));
+    memset(node1, 0, sizeof(sll_node_t));
 
     // Use
-    dll_insert_node_to_head(&list, node1);
+    sll_insert_node_to_head(&list, node1);
 
     // Check
     // node1 <-> node
@@ -92,8 +88,6 @@ void test_insert_node_to_head()
     assert(list.head == node1);
     assert(list.tail == node);
     assert(node1->next == node);
-    assert(node->prev == node1);
-    assert(node1->prev == NULL);
     assert(node->next == NULL);
 
     free(node);
@@ -109,18 +103,18 @@ void test_insert_node_after_node()
 
     // TEST 1
     // Prepare
-    doubly_linked_list_t list;
-    memset(&list, 0, sizeof(doubly_linked_list_t));
-    dll_node_t* node = malloc(sizeof(dll_node_t));
+    singly_linked_list_t list;
+    memset(&list, 0, sizeof(singly_linked_list_t));
+    sll_node_t* node = malloc(sizeof(sll_node_t));
     assert(node != NULL);
-    memset(node, 0, sizeof(dll_node_t));
-    dll_insert_node_to_tail(&list, node);
-    dll_node_t* node1 = malloc(sizeof(dll_node_t));
+    memset(node, 0, sizeof(sll_node_t));
+    sll_insert_node_to_tail(&list, node);
+    sll_node_t* node1 = malloc(sizeof(sll_node_t));
     assert(node1 != NULL);
-    memset(node1, 0, sizeof(dll_node_t));
+    memset(node1, 0, sizeof(sll_node_t));
 
     // Use
-    dll_insert_node_after_node(&list, list.head, node1);
+    sll_insert_node_after_node(&list, list.head, node1);
 
     // Check
     // node <-> node1
@@ -128,18 +122,16 @@ void test_insert_node_after_node()
     assert(list.head == node);
     assert(list.tail == node1);
     assert(node->next == node1);
-    assert(node1->prev == node);
-    assert(node->prev == NULL);
     assert(node1->next == NULL);
 
     // TEST 2
     // Prepare
-    dll_node_t* node2 = malloc(sizeof(dll_node_t));
+    sll_node_t* node2 = malloc(sizeof(sll_node_t));
     assert(node2 != NULL);
-    memset(node2, 0, sizeof(dll_node_t));
+    memset(node2, 0, sizeof(sll_node_t));
     
     // Use
-    dll_insert_node_after_node(&list, node, node2);
+    sll_insert_node_after_node(&list, node, node2);
 
     // Check
     // node <-> node2 <-> node1
@@ -147,20 +139,17 @@ void test_insert_node_after_node()
     assert(list.head == node);
     assert(list.tail == node1);
     assert(node->next == node2);
-    assert(node2->prev == node);
     assert(node2->next == node1);
-    assert(node1->prev == node2);
-    assert(node->prev == NULL);
     assert(node1->next == NULL);
 
     // TEST 3
     // Prepare
-    dll_node_t* node3 = malloc(sizeof(dll_node_t));
+    sll_node_t* node3 = malloc(sizeof(sll_node_t));
     assert(node3 != NULL);
-    memset(node3, 0, sizeof(dll_node_t));
+    memset(node3, 0, sizeof(sll_node_t));
 
     // Use
-    dll_insert_node_after_node(&list, node2, node3);
+    sll_insert_node_after_node(&list, node2, node3);
 
     // Check
     // node <-> node2 <-> node3 <-> node1
@@ -168,22 +157,18 @@ void test_insert_node_after_node()
     assert(list.head == node);
     assert(list.tail == node1);
     assert(node->next == node2);
-    assert(node2->prev == node);
     assert(node2->next == node3);
-    assert(node3->prev == node2);
     assert(node3->next == node1);
-    assert(node1->prev == node3);
-    assert(node->prev == NULL);
     assert(node1->next == NULL);
 
     // TEST 4
     // Prepare
-    dll_node_t* node4 = malloc(sizeof(dll_node_t));
+    sll_node_t* node4 = malloc(sizeof(sll_node_t));
     assert(node4 != NULL);
-    memset(node4, 0, sizeof(dll_node_t));
+    memset(node4, 0, sizeof(sll_node_t));
 
     // Use
-    dll_insert_node_after_node(&list, node1, node4);
+    sll_insert_node_after_node(&list, node1, node4);
     
     // Check
     // node <-> node2 <-> node3 <-> node1 <-> node4
@@ -191,14 +176,9 @@ void test_insert_node_after_node()
     assert(list.head == node);
     assert(list.tail == node4);
     assert(node->next == node2);
-    assert(node2->prev == node);
     assert(node2->next == node3);
-    assert(node3->prev == node2);
     assert(node3->next == node1);
-    assert(node1->prev == node3);
     assert(node1->next == node4);
-    assert(node4->prev == node1);
-    assert(node->prev == NULL);
     assert(node4->next == NULL);
 
     free(node);
@@ -217,18 +197,18 @@ void test_insert_node_before_node()
 
     // TEST 1
     // Prepare
-    doubly_linked_list_t list;
-    memset(&list, 0, sizeof(doubly_linked_list_t));
-    dll_node_t* node = malloc(sizeof(dll_node_t));
+    singly_linked_list_t list;
+    memset(&list, 0, sizeof(singly_linked_list_t));
+    sll_node_t* node = malloc(sizeof(sll_node_t));
     assert(node != NULL);
-    memset(node, 0, sizeof(dll_node_t));
-    dll_insert_node_to_tail(&list, node);
-    dll_node_t* node1 = malloc(sizeof(dll_node_t));
+    memset(node, 0, sizeof(sll_node_t));
+    sll_insert_node_to_tail(&list, node);
+    sll_node_t* node1 = malloc(sizeof(sll_node_t));
     assert(node1 != NULL);
-    memset(node1, 0, sizeof(dll_node_t));
+    memset(node1, 0, sizeof(sll_node_t));
 
     // Use
-    dll_insert_node_before_node(&list, node, node1);
+    sll_insert_node_before_node(&list, node, node1);
     
     // Check
     // node1 <-> node
@@ -236,18 +216,16 @@ void test_insert_node_before_node()
     assert(list.head == node1);
     assert(list.tail == node);
     assert(node1->next == node);
-    assert(node->prev == node1);
-    assert(node1->prev == NULL);
     assert(node->next == NULL);
 
     // TEST 2
     // Prepare
-    dll_node_t* node2 = malloc(sizeof(dll_node_t));
+    sll_node_t* node2 = malloc(sizeof(sll_node_t));
     assert(node2 != NULL);
-    memset(node2, 0, sizeof(dll_node_t));
+    memset(node2, 0, sizeof(sll_node_t));
 
     // Use
-    dll_insert_node_before_node(&list, node, node2);
+    sll_insert_node_before_node(&list, node, node2);
 
     // Check
     // node1 <-> node2 <-> node
@@ -255,20 +233,17 @@ void test_insert_node_before_node()
     assert(list.head == node1);
     assert(list.tail == node);
     assert(node1->next == node2);
-    assert(node2->prev == node1);
     assert(node2->next == node);
-    assert(node->prev == node2);
-    assert(node1->prev == NULL);
     assert(node->next == NULL);
 
     // TEST 3
     // Prepare
-    dll_node_t* node3 = malloc(sizeof(dll_node_t));
+    sll_node_t* node3 = malloc(sizeof(sll_node_t));
     assert(node3 != NULL);
-    memset(node3, 0, sizeof(dll_node_t));
+    memset(node3, 0, sizeof(sll_node_t));
 
     // Use
-    dll_insert_node_before_node(&list, node2, node3);
+    sll_insert_node_before_node(&list, node2, node3);
     
     // Check
     // node1 <-> node3 <-> node2 <-> node
@@ -276,22 +251,18 @@ void test_insert_node_before_node()
     assert(list.head == node1);
     assert(list.tail == node);
     assert(node1->next == node3);
-    assert(node3->prev == node1);
     assert(node3->next == node2);
-    assert(node2->prev == node3);
     assert(node2->next == node);
-    assert(node->prev == node2);
-    assert(node1->prev == NULL);
     assert(node->next == NULL);
 
     // TEST 4
     // Prepare
-    dll_node_t* node4 = malloc(sizeof(dll_node_t));
+    sll_node_t* node4 = malloc(sizeof(sll_node_t));
     assert(node4 != NULL);
-    memset(node4, 0, sizeof(dll_node_t));
+    memset(node4, 0, sizeof(sll_node_t));
 
     // Use
-    dll_insert_node_before_node(&list, node1, node4);
+    sll_insert_node_before_node(&list, node1, node4);
     
     // Check
     // node4 <-> node1 <-> node3 <-> node2 <-> node
@@ -299,14 +270,9 @@ void test_insert_node_before_node()
     assert(list.head == node4);
     assert(list.tail == node);
     assert(node4->next == node1);
-    assert(node1->prev == node4);
     assert(node1->next == node3);
-    assert(node3->prev == node1);
     assert(node3->next == node2);
-    assert(node2->prev == node3);
     assert(node2->next == node);
-    assert(node->prev == node2);
-    assert(node4->prev == NULL);
     assert(node->next == NULL);
 
     free(node);
@@ -325,18 +291,18 @@ void test_remove_node()
 
     // TEST 1:
     // Prepare
-    doubly_linked_list_t list;
-    memset(&list, 0, sizeof(doubly_linked_list_t));
-    dll_node_t* nodes = malloc(sizeof(dll_node_t) * 4);
+    singly_linked_list_t list;
+    memset(&list, 0, sizeof(singly_linked_list_t));
+    sll_node_t* nodes = malloc(sizeof(sll_node_t) * 4);
     assert(nodes != NULL);
     // nodes[0] <-> nodes[1] <-> nodes[2] <-> nodes[3]
-    dll_insert_node_to_tail(&list, &nodes[0]);
-    dll_insert_node_to_tail(&list, &nodes[1]);
-    dll_insert_node_to_tail(&list, &nodes[2]);
-    dll_insert_node_to_tail(&list, &nodes[3]);
+    sll_insert_node_to_tail(&list, &nodes[0]);
+    sll_insert_node_to_tail(&list, &nodes[1]);
+    sll_insert_node_to_tail(&list, &nodes[2]);
+    sll_insert_node_to_tail(&list, &nodes[3]);
 
     // Use
-    dll_remove_node(&list, &nodes[2]);
+    sll_remove_node(&list, &nodes[2]);
     
     // Check
     // nodes[0] <-> nodes[1] <-> nodes[3]
@@ -344,15 +310,12 @@ void test_remove_node()
     assert(list.head == &nodes[0]);
     assert(list.tail == &nodes[3]);
     assert(nodes[0].next == &nodes[1]);
-    assert(nodes[1].prev == &nodes[0]);
     assert(nodes[1].next == &nodes[3]);
-    assert(nodes[3].prev == &nodes[1]);
-    assert(nodes[0].prev == NULL);
     assert(nodes[3].next == NULL);
 
     // TEST 2:
     // Use
-    dll_remove_node(&list, &nodes[3]);
+    sll_remove_node(&list, &nodes[3]);
 
     // Check
     // nodes[0] <-> nodes[1]
@@ -360,25 +323,22 @@ void test_remove_node()
     assert(list.head == &nodes[0]);
     assert(list.tail == &nodes[1]);
     assert(nodes[0].next == &nodes[1]);
-    assert(nodes[1].prev == &nodes[0]);
-    assert(nodes[0].prev == NULL);
     assert(nodes[1].next == NULL);
 
     // TEST 3:
     // Use
-    dll_remove_node(&list, &nodes[0]);
+    sll_remove_node(&list, &nodes[0]);
 
     // Check
     // node[1]
     assert(list.count == 1);
     assert(list.head == &nodes[1]);
     assert(list.tail == &nodes[1]);
-    assert(nodes[1].prev == NULL);
     assert(nodes[1].next == NULL);
 
     // TEST 4:
     // Use
-    dll_remove_node(&list, &nodes[1]);
+    sll_remove_node(&list, &nodes[1]);
     
     // Check
     // empty list
@@ -399,80 +359,80 @@ void test_get_nth_node()
 
     // TEST 1:
     // Prepare
-    doubly_linked_list_t list;
-    memset(&list, 0, sizeof(doubly_linked_list_t));
+    singly_linked_list_t list;
+    memset(&list, 0, sizeof(singly_linked_list_t));
     
     // Use and check
     // empty
-    dll_node_t* received_node = dll_get_nth_node(&list, 0);
+    sll_node_t* received_node = sll_get_nth_node(&list, 0);
     assert(received_node == NULL);
-    received_node = dll_get_nth_node(&list, 1);
+    received_node = sll_get_nth_node(&list, 1);
     assert(received_node == NULL);
-    received_node = dll_get_nth_node(&list, 2);
+    received_node = sll_get_nth_node(&list, 2);
     assert(received_node == NULL);
 
     // TEST 2:
     // Prepare
-    dll_node_t* nodes = malloc(sizeof(dll_node_t) * 3);
+    sll_node_t* nodes = malloc(sizeof(sll_node_t) * 3);
     assert(nodes != NULL);
-    dll_insert_node_to_tail(&list, &nodes[0]);
+    sll_insert_node_to_tail(&list, &nodes[0]);
 
     // Use and check
     // nodes[0]
-    received_node = dll_get_nth_node(&list, 0);
+    received_node = sll_get_nth_node(&list, 0);
     assert(received_node == &nodes[0]);
-    received_node = dll_get_nth_node(&list, 1);
+    received_node = sll_get_nth_node(&list, 1);
     assert(received_node == NULL);
 
     // TEST 3:
     // Prepare
-    dll_insert_node_before_node(&list, &nodes[0], &nodes[1]);
+    sll_insert_node_before_node(&list, &nodes[0], &nodes[1]);
 
     // Use and check
     // nodes[1]<->nodes[0]
-    received_node = dll_get_nth_node(&list, 0);
+    received_node = sll_get_nth_node(&list, 0);
     assert(received_node == &nodes[1]);
-    received_node = dll_get_nth_node(&list, 1);
+    received_node = sll_get_nth_node(&list, 1);
     assert(received_node == &nodes[0]);
-    received_node = dll_get_nth_node(&list, 2);
+    received_node = sll_get_nth_node(&list, 2);
     assert(received_node == NULL);
 
     // TEST 4:
     // Prepare
-    dll_insert_node_before_node(&list, &nodes[1], &nodes[2]);
+    sll_insert_node_before_node(&list, &nodes[1], &nodes[2]);
 
     // Use and check
     // nodes[2]<->nodes[1]<->nodes[0]
-    received_node = dll_get_nth_node(&list, 0);
+    received_node = sll_get_nth_node(&list, 0);
     assert(received_node == &nodes[2]);
-    received_node = dll_get_nth_node(&list, 1);
+    received_node = sll_get_nth_node(&list, 1);
     assert(received_node == &nodes[1]);
-    received_node = dll_get_nth_node(&list, 2);
+    received_node = sll_get_nth_node(&list, 2);
     assert(received_node == &nodes[0]);
-    received_node = dll_get_nth_node(&list, 3);
+    received_node = sll_get_nth_node(&list, 3);
     assert(received_node == NULL);
 
     // TEST 5:
     // Prepare
-    dll_remove_node(&list, &nodes[1]);
+    sll_remove_node(&list, &nodes[1]);
 
     // Use and check
     // nodes[2]<->nodes[0]
-    received_node = dll_get_nth_node(&list, 0);
+    received_node = sll_get_nth_node(&list, 0);
     assert(received_node == &nodes[2]);
-    received_node = dll_get_nth_node(&list, 1);
+    received_node = sll_get_nth_node(&list, 1);
     assert(received_node == &nodes[0]);
-    received_node = dll_get_nth_node(&list, 2);
+    received_node = sll_get_nth_node(&list, 2);
     assert(received_node == NULL);
 
     free(nodes);
 }
 
 // TEST RANDOM STAFF
-void do_action(doubly_linked_list_t* list);
-void add_block(doubly_linked_list_t* list);
-void remove_block(doubly_linked_list_t* list);
-void insert_after_or_before_blocks(doubly_linked_list_t* list);
+void do_action(singly_linked_list_t* list);
+void add_block(singly_linked_list_t* list);
+void remove_block(singly_linked_list_t* list);
+void insert_after_or_before_blocks(singly_linked_list_t* list);
 
 uint8_t max_blocks_number = 32;
 
@@ -480,7 +440,7 @@ void test_random()
 {
     srand((unsigned int)time(0));
     for (uint32_t j = 0; j < 128; ++j) {
-        doubly_linked_list_t list;
+        singly_linked_list_t list;
         memset(&list, 0, sizeof(list));
 
         for (uint32_t i = 0; i < 512; ++i) {
@@ -489,14 +449,14 @@ void test_random()
         }
         for (size_t i = 0; i < list.count; ++i) {
             size_t random_index = rand() % list.count;
-            dll_node_t* node = dll_get_nth_node(&list, random_index);
-            dll_remove_node(&list, node);
+            sll_node_t* node = sll_get_nth_node(&list, random_index);
+            sll_remove_node(&list, node);
             free(node);
         }
     }
 }
 
-void do_action(doubly_linked_list_t* list)
+void do_action(singly_linked_list_t* list)
 {
     if (list->count == 0) {
         add_block(list);
@@ -531,34 +491,34 @@ void do_action(doubly_linked_list_t* list)
     }
 }
 
-void add_block(doubly_linked_list_t* list)
+void add_block(singly_linked_list_t* list)
 {
     //printf("ADD\n");
     if (list->count == 0) {
-        dll_node_t* node = malloc(sizeof(dll_node_t));
+        sll_node_t* node = malloc(sizeof(sll_node_t));
         assert(node);
-        dll_insert_node_to_tail(list, node);
+        sll_insert_node_to_tail(list, node);
         return;
     }
     uint8_t block_add_max = 3;
     // [1; block_add_max]
     uint8_t block_add_number = 1 + (rand() % block_add_max);
     for (uint8_t i = 0; i < block_add_number; ++i) {
-        dll_node_t* node = malloc(sizeof(dll_node_t));
+        sll_node_t* node = malloc(sizeof(sll_node_t));
         assert(node);
         // 0 - to tail
         // 1 - to head
         uint8_t t_or_h = rand() % 2;
         if (t_or_h == 0) {
-            dll_insert_node_to_tail(list, node);
+            sll_insert_node_to_tail(list, node);
         }
         else {
-            dll_insert_node_to_head(list, node);
+            sll_insert_node_to_head(list, node);
         }
     }
 }
 
-void remove_block(doubly_linked_list_t* list)
+void remove_block(singly_linked_list_t* list)
 {
     if (list->count == 0) {
         return;
@@ -573,27 +533,27 @@ void remove_block(doubly_linked_list_t* list)
     uint8_t block_add_number = 1 + (rand() % block_free_max);
     for (uint8_t i = 0; i < block_add_number; ++i) {
         uint32_t index = rand() % list->count;
-        dll_node_t* node = dll_get_nth_node(list, index);
+        sll_node_t* node = sll_get_nth_node(list, index);
         assert(node);
-        dll_remove_node(list, node);
+        sll_remove_node(list, node);
         free(node);
     }
 }
 
-void insert_after_or_before_blocks(doubly_linked_list_t* list)
+void insert_after_or_before_blocks(singly_linked_list_t* list)
 {
     //printf("INSERT\n");
-    dll_node_t* new_node = malloc(sizeof(dll_node_t));
+    sll_node_t* new_node = malloc(sizeof(sll_node_t));
     assert(new_node);
     uint32_t in_list_index = rand() % list->count;
-    dll_node_t* in_list_node = dll_get_nth_node(list, in_list_index);
+    sll_node_t* in_list_node = sll_get_nth_node(list, in_list_index);
     // 0 - after
     // 1 - before
     uint8_t a_or_b = rand() % 2;
     if (a_or_b == 0) {
-        dll_insert_node_after_node(list, in_list_node, new_node);
+        sll_insert_node_after_node(list, in_list_node, new_node);
     }
     else {
-        dll_insert_node_before_node(list, in_list_node, new_node);
+        sll_insert_node_before_node(list, in_list_node, new_node);
     }
 }

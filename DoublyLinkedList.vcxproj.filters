@@ -16,29 +16,29 @@
     <Filter Include="Header Files\dllist">
       <UniqueIdentifier>{e81269b1-01fb-4b76-bc65-776ada175c49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\dllist">
-      <UniqueIdentifier>{7b383c9c-82bf-4db1-9b38-ee81ea31565e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\tests">
       <UniqueIdentifier>{1822f04a-bd4e-47d6-9a32-83ac623694dd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\test">
       <UniqueIdentifier>{7bbe9c9b-8c8b-4dc5-ac04-fdf51452c674}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\sllist">
+      <UniqueIdentifier>{7b383c9c-82bf-4db1-9b38-ee81ea31565e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dllist\dllist.c">
-      <Filter>Source Files\dllist</Filter>
+    <ClCompile Include="dllist\sllist.c">
+      <Filter>Source Files\sllist</Filter>
     </ClCompile>
     <ClCompile Include="tests\tests.c">
       <Filter>Source Files\test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dllist\dllist.h">
+    <ClInclude Include="dllist\sllist.h">
       <Filter>Header Files\dllist</Filter>
     </ClInclude>
     <ClInclude Include="tests\tests.h">

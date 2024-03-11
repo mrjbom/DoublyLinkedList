@@ -1,11 +1,11 @@
 #include "tests/tests.h"
 #include "stdio.h"
-#include "dllist/dllist.h"
+#include "sllist/sllist.h"
 #include "stdlib.h"
 #include "string.h"
 
 typedef struct {
-    dll_node_t dll_node; // It's worth specifying the node first, it makes life easier
+    sll_node_t sll_node; // It's worth specifying the node first, it makes life easier
     int some_data; // Or data ptr
 } data_t;
 
@@ -27,8 +27,8 @@ int main(void)
     test_random();
 
     // Example
-    doubly_linked_list_t list;
-    memset(&list, 0, sizeof(doubly_linked_list_t));
+    singly_linked_list_t list;
+    memset(&list, 0, sizeof(singly_linked_list_t));
     data_t* data_array_ptr = (data_t*)malloc(sizeof(data_t) * 2);
     if (data_array_ptr == NULL) {
         return -1;
@@ -36,12 +36,12 @@ int main(void)
     data_array_ptr[0].some_data = 1;
     data_array_ptr[1].some_data = 2;
 
-    dll_insert_node_to_tail(&list, (dll_node_t*)&data_array_ptr[0]); // Or &data_array_ptr[0].dll_node
-    dll_insert_node_to_tail(&list, (dll_node_t*)&data_array_ptr[1]); // Or &data_array_ptr[1].dll_node
+    sll_insert_node_to_tail(&list, (sll_node_t*)&data_array_ptr[0]); // Or &data_array_ptr[0].dll_node
+    sll_insert_node_to_tail(&list, (sll_node_t*)&data_array_ptr[1]); // Or &data_array_ptr[1].dll_node
 
     // Get first and second node data
-    data_t* first_node_data = (data_t*)list.head; // Or (data_t*)dll_get_nth_node(&list, 0);
-    data_t* second_node_data = (data_t*)list.tail; // Or (data_t*)dll_get_nth_node(&list, 1);
+    data_t* first_node_data = (data_t*)list.head; // Or (data_t*)sll_get_nth_node(&list, 0);
+    data_t* second_node_data = (data_t*)list.tail; // Or (data_t*)sll_get_nth_node(&list, 1);
     printf("First node data %d\n", first_node_data->some_data);
     printf("Second node data %d\n", second_node_data->some_data);
 
