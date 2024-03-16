@@ -447,6 +447,7 @@ void test_random()
             //printf("Number of blocks: %u\n", list.count);
             do_action(&list);
         }
+
         for (size_t i = 0; i < list.count; ++i) {
             size_t random_index = rand() % list.count;
             sll_node_t* node = sll_get_nth_node(&list, random_index);
