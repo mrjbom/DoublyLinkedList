@@ -444,16 +444,18 @@ void test_random()
         memset(&list, 0, sizeof(list));
 
         for (uint32_t i = 0; i < 512; ++i) {
-            //printf("Number of blocks: %u\n", list.count);
             do_action(&list);
         }
 
-        for (size_t i = 0; i < list.count; ++i) {
+        size_t list_size = list.count;
+        for (size_t i = 0; i < list_size; ++i) {
             size_t random_index = rand() % list.count;
             sll_node_t* node = sll_get_nth_node(&list, random_index);
+            assert(node != NULL);
             sll_remove_node(&list, node);
             free(node);
         }
+        assert(list.count == 0);
     }
 }
 
@@ -495,18 +497,12 @@ void do_action(singly_linked_list_t* list)
 void add_block(singly_linked_list_t* list)
 {
     //printf("ADD\n");
-    if (list->count == 0) {
-        sll_node_t* node = malloc(sizeof(sll_node_t));
-        assert(node);
-        sll_insert_node_to_tail(list, node);
-        return;
-    }
     uint8_t block_add_max = 3;
     // [1; block_add_max]
     uint8_t block_add_number = 1 + (rand() % block_add_max);
     for (uint8_t i = 0; i < block_add_number; ++i) {
         sll_node_t* node = malloc(sizeof(sll_node_t));
-        assert(node);
+        assert(node != NULL);
         // 0 - to tail
         // 1 - to head
         uint8_t t_or_h = rand() % 2;
@@ -535,7 +531,7 @@ void remove_block(singly_linked_list_t* list)
     for (uint8_t i = 0; i < block_add_number; ++i) {
         uint32_t index = rand() % list->count;
         sll_node_t* node = sll_get_nth_node(list, index);
-        assert(node);
+        assert(node != NULL);
         sll_remove_node(list, node);
         free(node);
     }
