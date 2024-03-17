@@ -541,7 +541,7 @@ void insert_after_or_before_blocks(singly_linked_list_t* list)
 {
     //printf("INSERT\n");
     sll_node_t* new_node = malloc(sizeof(sll_node_t));
-    assert(new_node);
+    assert(new_node != NULL);
     uint32_t in_list_index = rand() % list->count;
     sll_node_t* in_list_node = sll_get_nth_node(list, in_list_index);
     // 0 - after
